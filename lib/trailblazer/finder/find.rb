@@ -8,16 +8,17 @@ module Trailblazer
       def initialize(entity, params, filters, paging = nil, sorting = nil, config = nil)
         @entity   = entity
         @filters  = filters
-        @params   = params
         @paging   = paging || {}
         @sorting = sorting || {}
         @config = config || {}
+        params = params.to_unsafe_h if params.respond_to? :to_unsafe_h
+        @params = params
       end
 
       def process_filters(ctx)
         @params.reduce(@entity) do |entity, (name, value)|
-          value = Utils::String.to_date(value) if Utils::String.date?(value)
           filter = @filters[name.to_sym] || @filters[name]
+          next entity if filter.empty?
           new_entity = ctx.instance_exec entity, filter[:name], value, &filter[:handler]
           new_entity || entity
         end
