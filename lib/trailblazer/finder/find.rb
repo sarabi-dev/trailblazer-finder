@@ -8,11 +8,10 @@ module Trailblazer
       def initialize(entity, params, filters, paging = nil, sorting = nil, config = nil)
         @entity   = entity
         @filters  = filters
+        @params   = params
         @paging   = paging || {}
         @sorting = sorting || {}
         @config = config || {}
-        params = params.to_unsafe_h if params.respond_to? :to_unsafe_h
-        @params = params
       end
 
       def process_filters(ctx)

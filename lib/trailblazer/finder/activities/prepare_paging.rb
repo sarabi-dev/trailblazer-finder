@@ -14,7 +14,10 @@ module Trailblazer
         def set_paging(ctx, **)
           ctx[:paging] = ctx.dig(:config, :paging) || {}
           ctx[:paging][:current_page] = ctx.dig(:params, :page) || 1
-          return true unless ctx[:params][:per_page]
+          unless ctx[:params][:per_page]
+            ctx[:paging][:per_page] = config[:paging][:defailt_per_page]
+            return true 
+          end
 
           ctx[:paging][:per_page] = ctx[:params][:per_page].to_i || ctx[:paging][:per_page]
           ctx[:paging][:per_page] = ctx[:paging][:max_per_page] if ctx[:paging][:per_page] > ctx[:paging][:max_per_page]

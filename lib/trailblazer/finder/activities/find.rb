@@ -14,11 +14,8 @@ module Trailblazer
             fetch_properties(result, filter_attribute, value, ctx[:properties]) || result
 
             ctx[:process] ||= {}
-            if result.empty?
-              ctx[:process][filter_attribute] = {}
-            else
-              ctx[:process][filter_attribute] = result.merge!(value: value)
-            end
+            ctx[:process][filter_attribute] = result
+            ctx[:process][filter_attribute].merge!(value: value) if !result.empty?
           end
           true
         end

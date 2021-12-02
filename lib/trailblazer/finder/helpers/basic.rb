@@ -8,9 +8,24 @@ module Trailblazer
           return if @errors.any?
           return if @find.paging.empty?
 
-          result = @find.paging
-          result[:page] = result[:page] || result[:current_page]
+          result = Utils::Hash.remove_keys_from_hash(@find.paging, %i[handler max_per_page min_per_page])
+          result[:page] = result[:page] || result.delete(:current_page) || result[:current_page]
           result
+        end
+
+        def page
+          return if @errors.any?
+          return if @find.paging.empty?
+
+          page = @find.paging[:page] || @find.paging[:current_page]
+          page
+        end
+
+        def per_page
+          return if @errors.any?
+          return if @find.paging.empty?
+
+          @find.paging[:per_page]
         end
 
         def params
