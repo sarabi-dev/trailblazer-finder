@@ -177,7 +177,7 @@ module Trailblazer
             property :value, type: Types::String
           end
 
-          expect(finder.params).to eq per_page: 2, page: 1, sort: nil
+          expect(finder.params).to eq defailt_per_page: 2, per_page: 2, page: 1, sort: nil
         end
 
         it "shows the parameters that are given" do
@@ -196,7 +196,7 @@ module Trailblazer
           end
 
           expect(finder.result.map { |n| n[:id] }).to eq [1]
-          expect(finder.params).to eq value_eq: "Test 1", sort: "id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "id desc", page: 2, per_page: 2
         end
       end
 
@@ -216,7 +216,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.sorting).to eq "value asc, id desc"
         end
       end
@@ -237,7 +237,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.filters[:value_eq][:predicate]).to eq "eq"
         end
       end
@@ -258,7 +258,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.signal.to_json).to include("success")
         end
       end
@@ -279,7 +279,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
           expect(finder.sort?(:id)).to eq false
           expect(finder.sort?(:value)).to eq true
         end
@@ -301,7 +301,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.sort_direction_for(:id)).to eq "desc"
           expect(finder.sort_direction_for(:value)).to eq "asc"
         end
@@ -323,7 +323,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.reverse_sort_direction_for(:id)).to eq "asc"
           expect(finder.reverse_sort_direction_for(:value)).to eq "desc"
         end
@@ -345,7 +345,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
           expect(finder.sort_params_for(:id)[:sort]).to eq "value asc, id desc"
           expect(finder.sort_params_for(:value)[:sort]).to eq "value desc"
         end
@@ -365,7 +365,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: nil, page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: nil, page: 2, per_page: 2
           expect(finder.sort_params_for(:id)[:sort]).to eq "id desc"
           expect(finder.sort_params_for(:value)[:sort]).to eq "value desc"
         end
@@ -387,7 +387,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc", page: 2, per_page: 2
           expect(finder.new_sort_params_for(:id)[:sort]).to eq "id desc"
         end
       end
@@ -408,7 +408,7 @@ module Trailblazer
             property :id, type: Types::Integer, sortable: true
           end
 
-          expect(finder.params).to eq value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
+          expect(finder.params).to eq defailt_per_page: 2, value_eq: "Test 1", sort: "value asc, id desc", page: 2, per_page: 2
           expect(finder.remove_sort_params_for(:id)[:sort]).to eq "value asc"
         end
       end

@@ -13,9 +13,9 @@ module Trailblazer
 
         def set_paging(ctx, **)
           ctx[:paging] = ctx.dig(:config, :paging) || {}
-          ctx[:paging][:current_page] = ctx.dig(:params, :page) || 1
+          ctx[:paging][:current_page] = ctx.dig(:params, :page).to_i || 1
           unless ctx[:params][:per_page]
-            ctx[:paging][:per_page] = config[:paging][:defailt_per_page]
+            ctx[:paging][:per_page] = ctx[:paging][:defailt_per_page]
             return true 
           end
 
