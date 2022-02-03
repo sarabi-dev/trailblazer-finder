@@ -53,6 +53,12 @@ module Trailblazer
 
           @count ||= result.size
         end
+
+        # paginationが効く前のレコード数を取得
+        # 上にcountメソッドはpaging聞いた後の件数が返ってくる
+        def count_all
+          fetch_result_all.size
+        end
       end
     end
   end

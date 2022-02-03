@@ -38,6 +38,10 @@ module Trailblazer
 
         process_filters ctx
       end
+
+      def query_all(ctx)
+        process_filters ctx
+      end
     end
   end
 end
