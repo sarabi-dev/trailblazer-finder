@@ -26,12 +26,14 @@ module Trailblazer
       def fetch_result
         result = @find.query self
         result = Utils::Array.convert_hashes_in_array_to_struct(result) if result.first.is_a?(Hash)
+        binding.break # DEBUG_CODE: あとで消す
         result
       end
 
       def fetch_result_all
         result = @find.query_all self
         result = Utils::Array.convert_hashes_in_array_to_struct(result) if result.first.is_a?(Hash)
+        binding.break # DEBUG_CODE: あとで消す
         result
       end
     end
