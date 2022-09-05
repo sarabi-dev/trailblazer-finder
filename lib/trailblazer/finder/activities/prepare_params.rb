@@ -15,7 +15,9 @@ module Trailblazer
         end
 
         def set_params(ctx, **)
-          ctx[:params] = ctx[:options][:params] || {}
+          default_params = ctx[:options][:params] || {}
+          default_params = default_params.to_unsafe_h if default_params.respond_to? :to_unsafe_h
+          ctx[:params] = default_params
         end
 
         step :validate_params

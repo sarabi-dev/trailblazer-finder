@@ -14,7 +14,8 @@ module Trailblazer
       end
 
       def paging(**options)
-        config[:paging][:per_page] = options[:per_page] || 25
+        config[:paging][:defailt_per_page] = options[:per_page] || 25
+        config[:paging][:per_page] = config[:paging][:defailt_per_page]
         config[:paging][:min_per_page] = options[:min_per_page] || 10
         config[:paging][:max_per_page] = options[:max_per_page] || 100
       end

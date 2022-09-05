@@ -13,6 +13,21 @@ module Trailblazer
           result
         end
 
+        def page
+          return if @errors.any?
+          return if @find.paging.empty?
+
+          page = @find.paging[:page] || @find.paging[:current_page]
+          page
+        end
+
+        def per_page
+          return if @errors.any?
+          return if @find.paging.empty?
+
+          @find.paging[:per_page]
+        end
+
         def params
           return @options[:params] if @errors.any?
 
@@ -37,6 +52,12 @@ module Trailblazer
           return if @errors.any?
 
           @count ||= result.size
+        end
+
+        # paginationが効く前のレコード数を取得
+        # 上にcountメソッドはpaging聞いた後の件数が返ってくる
+        def count_all
+          fetch_result_all.size
         end
       end
     end

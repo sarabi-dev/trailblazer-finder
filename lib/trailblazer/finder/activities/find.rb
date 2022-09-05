@@ -12,10 +12,10 @@ module Trailblazer
             filter_attribute = attribute.to_sym
             fetch_filters(ctx, result, filter_attribute) || result if ctx[:filters].include?(filter_attribute)
             fetch_properties(result, filter_attribute, value, ctx[:properties]) || result
-            next ctx[:params].delete(attribute) if result.empty?
 
             ctx[:process] ||= {}
-            ctx[:process][filter_attribute] = result.merge!(value: value)
+            ctx[:process][filter_attribute] = result
+            ctx[:process][filter_attribute].merge!(value: value) if !result.empty?
           end
           true
         end
