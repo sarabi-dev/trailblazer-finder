@@ -16,13 +16,13 @@ module Trailblazer
         end
 
         def sort_direction_for(attribute)
-          return "asc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
+          return "asc" if (!sorting.nil? && (sorting.include?("#{attribute} asc") || sorting.include?("#{attribute} ASC"))) || @find.config[:sorting][attribute.to_sym] == :asc
 
           "desc"
         end
 
         def reverse_sort_direction_for(attribute)
-          return "desc" if (!sorting.nil? && sorting.include?("#{attribute} asc")) || @find.config[:sorting][attribute.to_sym] == :asc
+          return "desc" if (!sorting.nil? && (sorting.include?("#{attribute} asc") || sorting.include?("#{attribute} ASC"))) || @find.config[:sorting][attribute.to_sym] == :asc
 
           "asc"
         end
