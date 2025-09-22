@@ -57,7 +57,10 @@ module Trailblazer
         # paginationが効く前のレコード数を取得
         # 上にcountメソッドはpaging聞いた後の件数が返ってくる
         def count_all
-          fetch_result_all.size
+          result = fetch_result_all
+          # order は不要なので除去
+          result = result.except(:order) if result.respond_to?(:except)
+          result.size
         end
       end
     end
